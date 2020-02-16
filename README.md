@@ -31,7 +31,7 @@ app.use(routes)
 
 * 'Integration tests' are tests that check the correct functioning of several interconnected functions all working together.
 
-* `Supertest` and `Tape` allow us to perform Integration tests checking that the Server and Database are communicating properly, and calls to the Server endpoints respond with the correct status codes and any data requested.
+* `Supertest` and `Jest` allow us to perform Integration tests checking that the Server and Database are communicating properly, and calls to the Server endpoints respond with the correct status codes and any data requested.
 
 * In the server folder there is a `routes` subfolder inside of which all the
   servers routes have been written for you.
@@ -67,23 +67,22 @@ app.use(routes)
 * Run `npm start`. Now you can use postman or another tool to make requests to the endpoints.
 * In **another** terminal pane run npm test **(for this we don't actually need the server to be running)**.
 * Then go to you test folder, and open `routes.test.js`
-* Inside this file you will be using `tape` and `supertest`(a testing
+* Inside this file you will be using `Jest` and `supertest`(a testing
   framework - [link to the docs!!](https://github.com/visionmedia/supertest))
-* Tape allows you to make assertions and check that things are equal
+* Jest allows you to make assertions and check that things are equal
   etc. `supertest` will allow you to make requests to your server and expect
   certain results, and also has some limited assertion/testing functionality.
 * The structure of your tests should be as below. Note that ```supertest``` is assigned to ```request``` as this is a convention.
   ```js
   const request = require('supertest');
-  const test = require('tape')
 
-  test('What your tests is testing', (t) => {
+  test('What your tests is testing', (done) => {
       request(app)
         .get('/facsters')
         .expect(200)
         .end(function(err, res) {
-          /* INSERT TAPE TESTS HERE
-          Don't forget to end your test */
+          /* INSERT Jest TESTS HERE
+          Don't forget to end your test, documentation is your friend */ 
         })
       })
   ```
@@ -94,10 +93,5 @@ app.use(routes)
   - For example, you might test the status code (as above), the content type, and the contents of the body.
   - Make sure you write tests for each route, and test each response thoroughly.
 *  Although `supertest` is new to you there is a whole wide world of
-  frameworks and libraries in javascript (#JSFatigue) and learning to use the docs
+  frameworks and libraries in javascript (#JS_Fatigue) and learning to use the docs
   is probably half of what it means to be a good js developer.
-* You will note that I have snuck promises into this workshop as they are an
-  extremely common and important tool for handling asynchronicity and are
-  well on their way to replacing callbacks.
-* you won't be expected to use
-  these but I have used then to make the queries so take a look, please ask if any of it is unclear.
